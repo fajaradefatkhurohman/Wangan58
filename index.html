@@ -132,16 +132,27 @@
           bubur, soto, atau dinikmati langsung.
         </p>
 
-        <div class="price">
-          Rp10.000
-        </div>
+<div class="price">
+  Rp10.000
+</div>
 
-        <a
+<div class="quantity-box">
+  <button onclick="kurang()">−</button>
+  <span id="jumlah">1</span>
+  <button onclick="tambah()">+</button>
+</div>
+
+<div class="total">
+  Total: <span id="total">Rp10.000</span>
+</div>
+
+<a
   class="order-button"
-  href="https://wa.me/6285742528082?text=Halo%20Wangan58,%20saya%20ingin%20pesan%20Bawang%20Goreng%20Original"
+  id="waButton"
+  href="#"
   target="_blank"
 >
-  Pesan Sekarang
+  Pesan via WhatsApp
 </a>
 
       </div>
@@ -152,6 +163,42 @@
   <footer>
     © 2026 Wangan58
   </footer>
+
+  <script>
+  const harga = 10000;
+  let jumlah = 1;
+
+  function updateTotal() {
+    document.getElementById("jumlah").textContent = jumlah;
+
+    const total = harga * jumlah;
+
+    document.getElementById("total").textContent =
+      "Rp" + total.toLocaleString("id-ID");
+
+    const pesan =
+      "Halo Wangan58, saya ingin pesan Bawang Goreng Original.%0A" +
+      "Jumlah: " + jumlah + "%0A" +
+      "Total: Rp" + total.toLocaleString("id-ID");
+
+    document.getElementById("waButton").href =
+      "https://wa.me/6285742528082?text=" + pesan;
+  }
+
+  function tambah() {
+    jumlah++;
+    updateTotal();
+  }
+
+  function kurang() {
+    if (jumlah > 1) {
+      jumlah--;
+      updateTotal();
+    }
+  }
+
+  updateTotal();
+</script>
 
 </body>
 </html>
