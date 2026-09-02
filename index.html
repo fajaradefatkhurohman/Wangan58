@@ -146,6 +146,28 @@
   Total: <span id="total">Rp10.000</span>
 </div>
 
+        <div class="customer-form">
+
+  <input
+    type="text"
+    id="nama"
+    placeholder="Nama kamu"
+  >
+
+  <textarea
+    id="alamat"
+    placeholder="Alamat lengkap"
+    rows="3"
+  ></textarea>
+
+  <textarea
+    id="catatan"
+    placeholder="Catatan pesanan (opsional)"
+    rows="2"
+  ></textarea>
+
+</div>
+
 <a
   class="order-button"
   id="waButton"
@@ -176,10 +198,24 @@
     document.getElementById("total").textContent =
       "Rp" + total.toLocaleString("id-ID");
 
+    updateWhatsApp();
+  }
+
+  function updateWhatsApp() {
+    const nama = document.getElementById("nama").value;
+    const alamat = document.getElementById("alamat").value;
+    const catatan = document.getElementById("catatan").value;
+
+    const total = harga * jumlah;
+
     const pesan =
-      "Halo Wangan58, saya ingin pesan Bawang Goreng Original.%0A" +
+      "Halo Wangan58, saya ingin pesan:%0A%0A" +
+      "Produk: Bawang Goreng Original%0A" +
       "Jumlah: " + jumlah + "%0A" +
-      "Total: Rp" + total.toLocaleString("id-ID");
+      "Total: Rp" + total.toLocaleString("id-ID") + "%0A%0A" +
+      "Nama: " + encodeURIComponent(nama) + "%0A" +
+      "Alamat: " + encodeURIComponent(alamat) + "%0A" +
+      "Catatan: " + encodeURIComponent(catatan);
 
     document.getElementById("waButton").href =
       "https://wa.me/6285742528082?text=" + pesan;
@@ -196,6 +232,10 @@
       updateTotal();
     }
   }
+
+  document.getElementById("nama").addEventListener("input", updateWhatsApp);
+  document.getElementById("alamat").addEventListener("input", updateWhatsApp);
+  document.getElementById("catatan").addEventListener("input", updateWhatsApp);
 
   updateTotal();
 </script>
