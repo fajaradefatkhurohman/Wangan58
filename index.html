@@ -3,24 +3,154 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wangan58 - Bawang Goreng</title>
+
+  <title>Wangan58 - Bawang Goreng Original</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f3ed;
+      color: #2d241d;
+    }
+
+    header {
+      background: #3b281d;
+      color: white;
+      text-align: center;
+      padding: 22px 15px;
+    }
+
+    header h1 {
+      font-size: 30px;
+      margin-bottom: 5px;
+    }
+
+    header p {
+      font-size: 14px;
+      opacity: 0.85;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 25px auto;
+      padding: 0 18px;
+    }
+
+    .product {
+      background: white;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    }
+
+    .product img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .content {
+      padding: 22px;
+    }
+
+    .content h2 {
+      font-size: 25px;
+      margin-bottom: 10px;
+    }
+
+    .description {
+      color: #6d625a;
+      line-height: 1.6;
+      font-size: 15px;
+      margin-bottom: 18px;
+    }
+
+    .price {
+      font-size: 27px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .order-button {
+      display: block;
+      width: 100%;
+      text-align: center;
+      background: #3b281d;
+      color: white;
+      padding: 15px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 17px;
+      font-weight: bold;
+    }
+
+    .order-button:hover {
+      opacity: 0.9;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px 15px;
+      color: #8a7d72;
+      font-size: 13px;
+    }
+  </style>
 </head>
+
 <body>
 
-  <h1>Wangan58</h1>
-  <h2>Bawang Goreng Original</h2>
+  <header>
+    <h1>Wangan58</h1>
+    <p>Renyah • Gurih • Bikin Nagih</p>
+  </header>
 
-  <p>Bawang goreng renyah, gurih, dan bikin nagih!</p>
+  <main class="container">
 
-  <p>
-    Dibuat dari bawang pilihan yang digoreng hingga menghasilkan
-    tekstur super crispy dan aroma yang menggugah selera.
-    Cocok untuk topping nasi, mie, bubur, soto, atau dinikmati langsung.
-  </p>
+    <div class="product">
 
-  <h3>Rp10.000</h3>
+      <img
+        src="IMAGE_URL_DI_SINI"
+        alt="Bawang Goreng Original Wangan58"
+      >
 
-  <button>Pesan Sekarang</button>
+      <div class="content">
+
+        <h2>Bawang Goreng Original</h2>
+
+        <p class="description">
+          Bawang goreng renyah, gurih, dan bikin nagih!
+          Dibuat dari bawang pilihan yang digoreng hingga
+          menghasilkan tekstur super crispy dan aroma yang
+          menggugah selera. Cocok untuk topping nasi, mie,
+          bubur, soto, atau dinikmati langsung.
+        </p>
+
+        <div class="price">
+          Rp10.000
+        </div>
+
+        <a
+          class="order-button"
+          href="#"
+        >
+          Pesan Sekarang
+        </a>
+
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    © 2026 Wangan58
+  </footer>
 
 </body>
 </html>
