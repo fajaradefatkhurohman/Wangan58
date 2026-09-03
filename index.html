@@ -129,133 +129,10 @@
   <footer>
     © 2026 Seblak Wangan58
   </footer>
-  
-<script>
 
-const SUPABASE_URL = "https://fkrfvpgsfbmlrllmehbs.supabase.co";
 
-const SUPABASE_KEY = "sb_publishable_Ax_ddhJJpdlskgDAIxFAcg_Sd1pYCI5";
+  <script>
 
-async function loadProducts() {
-
-  const menu = document.getElementById("menu");
-
-  try {
-
-    const response = await fetch(
-      SUPABASE_URL + "/rest/v1/products?select=*",
-      {
-        headers: {
-          "apikey": SUPABASE_KEY
-        }
-      }
-    );
-
-    const text = await response.text();
-
-    console.log("Status:", response.status);
-    console.log("Supabase:", text);
-
-    if (!response.ok) {
-      throw new Error(text);
-    }
-
-    const products = JSON.parse(text);
-
-    if (products.length === 0) {
-      menu.innerHTML = `
-        <div class="loading">
-          Belum ada menu di database.
-        </div>
-      `;
-      return;
-    }
-
-    const categories = {};
-
-    products.forEach(product => {
-
-      const category = product.category || "Menu";
-
-      if (!categories[category]) {
-        categories[category] = [];
-      }
-
-      categories[category].push(product);
-
-    });
-
-    menu.innerHTML = "";
-
-    Object.keys(categories).forEach(category => {
-
-      const section = document.createElement("section");
-
-      section.className = "category";
-
-      section.innerHTML = `
-        <h2>${category}</h2>
-      `;
-
-      categories[category].forEach(product => {
-
-        const card = document.createElement("div");
-
-        card.className = "menu-card";
-
-        let imageHTML = "";
-
-        if (product.image_url) {
-          imageHTML = `
-            <img
-              src="${product.image_url}"
-              alt="${product.name}"
-            >
-          `;
-        }
-
-        card.innerHTML = `
-          ${imageHTML}
-
-          <h3>${product.name}</h3>
-
-          <div class="price">
-            Rp ${Number(product.price || 0).toLocaleString("id-ID")}
-          </div>
-
-          <p>
-            ${product.description || ""}
-          </p>
-        `;
-
-        section.appendChild(card);
-
-      });
-
-      menu.appendChild(section);
-
-    });
-
-  } catch (error) {
-
-    console.error("ERROR SUPABASE:", error);
-
-    menu.innerHTML = `
-      <div class="error">
-        Gagal mengambil menu dari Supabase.
-        <br><br>
-        ${error.message}
-      </div>
-    `;
-
-  }
-
-}
-
-loadProducts();
-
-</script>
-  
     // ==============================
     // SUPABASE
     // ==============================
@@ -327,6 +204,90 @@ loadProducts();
         // ==============================
         // TAMPILKAN MENU
         // ==============================
+
+        menu.innerHTML = "";
+
+        Object.keys(categories).forEach(category => {
+
+          const section =
+            document.createElement("section");
+
+          section.className = "category";
+
+          section.innerHTML = `
+            <h2>${category}</h2>
+          `;
+
+
+          categories[category].forEach(product => {
+
+            const card =
+              document.createElement("div");
+
+            card.className = "menu-card";
+
+
+            let imageHTML = "";
+
+            if (product.image_url) {
+
+              imageHTML = `
+                <img
+                  src="${product.image_url}"
+                  alt="${product.name}"
+                >
+              `;
+
+            }
+
+
+            card.innerHTML = `
+              ${imageHTML}
+
+              <h3>${product.name}</h3>
+
+              <div class="price">
+                Rp ${Number(product.price || 0).toLocaleString("id-ID")}
+              </div>
+
+              <p>
+                ${product.description || ""}
+              </p>
+            `;
+
+
+            section.appendChild(card);
+
+          });
+
+
+          menu.appendChild(section);
+
+        });
+
+      }
+
+      catch (error) {
+
+        console.error(error);
+
+        menu.innerHTML = `
+          <div class="error">
+            Gagal memuat menu.
+            <br><br>
+            Periksa koneksi Supabase dan pengaturan tabel products.
+          </div>
+        `;
+
+      }
+
+    }
+
+
+    // Jalankan saat halaman dibuka
+    loadProducts();
+
+  </script>
 
 </body>
 </html>
