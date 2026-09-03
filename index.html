@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Warung Seblak</title>
+  <title>Seblak Wangan58</title>
 
   <style>
     * {
@@ -19,24 +19,24 @@
       color: #222;
     }
 
-   
-header {
-  background: #111;
-  color: white;
-  text-align: center;
-  padding: 22px 15px;
-}
+    header {
+      background: #111;
+      color: white;
+      text-align: center;
+      padding: 22px 15px;
+    }
 
-header h1 {
-  font-size: 24px;
-  margin-bottom: 2px;
-  letter-spacing: 1px;
-}
+    header h1 {
+      font-size: 24px;
+      margin-bottom: 2px;
+      letter-spacing: 1px;
+    }
 
-header p {
-  font-size: 13px;
-  color: #ccc;
-}
+    header p {
+      font-size: 13px;
+      color: #ccc;
+    }
+
     .container {
       max-width: 600px;
       margin: auto;
@@ -67,9 +67,37 @@ header p {
       margin-bottom: 6px;
     }
 
+    .menu-card .price {
+      font-weight: bold;
+      margin-top: 8px;
+    }
+
     .menu-card p {
       font-size: 14px;
       color: #777;
+      margin-top: 5px;
+    }
+
+    .menu-card img {
+      width: 100%;
+      max-height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 12px;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 30px;
+      color: #777;
+    }
+
+    .error {
+      background: #ffe5e5;
+      color: #b00020;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 20px;
     }
 
     footer {
@@ -90,61 +118,176 @@ header p {
 
   <div class="container">
 
-    <!-- SEBLAK -->
-    <section class="category">
-      <h2>🍜 Seblak</h2>
-
-      <div class="menu-card">
-        <h3>Seblak Racik</h3>
-        <p>Pilih topping sesuai selera kamu.</p>
+    <div id="menu">
+      <div class="loading">
+        Memuat menu...
       </div>
-    </section>
-
-    <!-- TOPPING -->
-    <section class="category">
-      <h2>🍢 Topping</h2>
-
-      <div class="menu-card">
-        <h3>Topping 1</h3>
-        <p>Pilih topping favoritmu.</p>
-      </div>
-
-      <div class="menu-card">
-        <h3>Topping 2</h3>
-        <p>Pilih topping favoritmu.</p>
-      </div>
-
-      <div class="menu-card">
-        <h3>Topping 3</h3>
-        <p>Pilih topping favoritmu.</p>
-      </div>
-
-      <div class="menu-card">
-        <h3>Topping 4</h3>
-        <p>Pilih topping favoritmu.</p>
-      </div>
-
-      <div class="menu-card">
-        <h3>Topping 5</h3>
-        <p>Pilih topping favoritmu.</p>
-      </div>
-    </section>
-
-    <!-- MINUMAN -->
-    <section class="category">
-      <h2>🥤 Minuman</h2>
-
-      <div class="menu-card">
-        <h3>Ice Tea</h3>
-        <p>Es teh segar.</p>
-      </div>
-    </section>
+    </div>
 
   </div>
 
   <footer>
-    © 2026 Warung Seblak
+    © 2026 Seblak Wangan58
   </footer>
+
+
+  <script>
+
+    // ==============================
+    // SUPABASE
+    // ==============================
+
+    const SUPABASE_URL =
+      "https://fkrfvpgsfbmlrllmehbs.supabase.co";
+
+    const SUPABASE_KEY =
+      "sb_publishable_Ax_ddhJJpdlskgDAIxFAcg_Sd1pYCI5";
+
+
+    // ==============================
+    // AMBIL DATA PRODUK
+    // ==============================
+
+    async function loadProducts() {
+
+      const menu = document.getElementById("menu");
+
+      try {
+
+        const response = await fetch(
+          SUPABASE_URL + "/rest/v1/products?select=*",
+          {
+            method: "GET",
+            headers: {
+              "apikey": SUPABASE_KEY,
+              "Authorization": "Bearer " + SUPABASE_KEY
+            }
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Gagal mengambil data dari Supabase.");
+        }
+
+        const products = await response.json();
+
+        if (products.length === 0) {
+          menu.innerHTML = `
+            <div class="loading">
+              Belum ada menu.
+            </div>
+          `;
+          return;
+        }
+
+
+        // ==============================
+        // KELOMPOKKAN BERDASARKAN CATEGORY
+        // ==============================
+
+        const categories = {};
+
+        products.forEach(product => {
+
+          const category =
+            product.category || "Menu";
+
+          if (!categories[category]) {
+            categories[category] = [];
+          }
+
+          categories[category].push(product);
+
+        });
+
+
+        // ==============================
+        // TAMPILKAN MENU
+        // ==============================
+
+        menu.innerHTML = "";
+
+        Object.keys(categories).forEach(category => {
+
+          const section =
+            document.createElement("section");
+
+          section.className = "category";
+
+          section.innerHTML = `
+            <h2>${category}</h2>
+          `;
+
+
+          categories[category].forEach(product => {
+
+            const card =
+              document.createElement("div");
+
+            card.className = "menu-card";
+
+
+            let imageHTML = "";
+
+            if (product.image_url) {
+
+              imageHTML = `
+                <img
+                  src="${product.image_url}"
+                  alt="${product.name}"
+                >
+              `;
+
+            }
+
+
+            card.innerHTML = `
+              ${imageHTML}
+
+              <h3>${product.name}</h3>
+
+              <div class="price">
+                Rp ${Number(product.price || 0).toLocaleString("id-ID")}
+              </div>
+
+              <p>
+                ${product.description || ""}
+              </p>
+            `;
+
+
+            section.appendChild(card);
+
+          });
+
+
+          menu.appendChild(section);
+
+        });
+
+      }
+
+      catch (error) {
+
+        console.error(error);
+
+        menu.innerHTML = `
+          <div class="error">
+            Gagal memuat menu.
+            <br><br>
+            Periksa koneksi Supabase dan pengaturan tabel products.
+          </div>
+        `;
+
+      }
+
+    }
+
+
+    // Jalankan saat halaman dibuka
+    loadProducts();
+
+  </script>
 
 </body>
 </html>
