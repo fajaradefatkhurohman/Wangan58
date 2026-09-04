@@ -858,29 +858,11 @@
     // WHATSAPP
     // ==============================
 
-    function orderWhatsApp() {
+
+function orderWhatsApp() {
 
   if (cart.length === 0) {
     alert("Silakan pilih menu terlebih dahulu.");
-    return;
-  }
-
-  const customerName =
-    document.getElementById("customerName").value.trim();
-
-  const customerAddress =
-    document.getElementById("customerAddress").value.trim();
-
-  const customerNote =
-    document.getElementById("customerNote").value.trim();
-
-  if (customerName === "") {
-    alert("Silakan isi nama terlebih dahulu.");
-    return;
-  }
-
-  if (customerAddress === "") {
-    alert("Silakan isi alamat terlebih dahulu.");
     return;
   }
 
@@ -922,20 +904,6 @@
     formatRupiah(total) +
     "*";
 
-  message +=
-    "%0A%0A👤 *Nama:* " +
-    encodeURIComponent(customerName);
-
-  message +=
-    "%0A📍 *Alamat:* " +
-    encodeURIComponent(customerAddress);
-
-  if (customerNote !== "") {
-    message +=
-      "%0A📝 *Catatan:* " +
-      encodeURIComponent(customerNote);
-  }
-
   const url =
     "https://wa.me/" +
     WHATSAPP_NUMBER +
@@ -944,8 +912,6 @@
 
   window.open(url, "_blank");
 }
-
-
       // ==============================
       // SEBLAK + LEVEL
       // ==============================
