@@ -705,31 +705,66 @@
 
     function setSpicyLevel(level) {
 
-      spicyLevel = level;
+  spicyLevel = level;
 
+  document
+    .querySelectorAll(".spicy-level")
+    .forEach(button => {
+      button.classList.remove("active");
+    });
 
-      document
-        .querySelectorAll(".spicy-level")
-        .forEach(button => {
+  const selected =
+    document.getElementById(
+      "spicy-" + level
+    );
 
-          button.classList.remove("active");
+  if (selected) {
+    selected.classList.add("active");
+  }
 
-        });
+  const seblak =
+    productsData.find(
+      product =>
+        product.name
+          .toLowerCase()
+          .includes("seblak")
+    );
 
+  if (!seblak) {
+    return;
+  }
 
-      const selected =
-        document.getElementById(
-          "spicy-" + level
-        );
+  const quantityElement =
+    document.querySelector(
+      '[id^="qty-' + seblak.id + '"]'
+    );
 
+  if (!quantityElement) {
+    return;
+  }
 
-      if (selected) {
+  const itemId =
+    String(seblak.id) +
+    "-level-" +
+    level;
 
-        selected.classList.add("active");
+  const item =
+    cart.find(
+      item =>
+        String(item.id) === itemId
+    );
 
-      }
+  quantityElement.id =
+    "qty-" +
+    seblak.id +
+    "-level-" +
+    level;
 
-    }
+  quantityElement.textContent =
+    item
+      ? item.quantity
+      : 0;
+}
 
 
     // ==============================
