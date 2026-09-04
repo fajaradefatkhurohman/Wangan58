@@ -745,16 +745,18 @@
     // PILIH LEVEL PEDAS
     // ==============================
 
-    function setSpicyLevel(level) {
+function setSpicyLevel(level) {
 
   spicyLevel = level;
 
+  // Hapus status aktif dari semua level
   document
     .querySelectorAll(".spicy-level")
     .forEach(button => {
       button.classList.remove("active");
     });
 
+  // Aktifkan level yang dipilih
   const selected =
     document.getElementById(
       "spicy-" + level
@@ -764,6 +766,7 @@
     selected.classList.add("active");
   }
 
+  // Cari produk Seblak
   const seblak =
     productsData.find(
       product =>
@@ -776,44 +779,56 @@
     return;
   }
 
-  const quantityElement =
-    document.querySelector(
-      '[id^="qty-' + seblak.id + '"]'
-    );
-
-  if (!quantityElement) {
-    return;
-  }
-
+  // ID item berdasarkan level
   const itemId =
     String(seblak.id) +
     "-level-" +
     level;
 
+  // Cari jumlah yang sudah dipilih pada level tersebut
   const item =
     cart.find(
       item =>
         String(item.id) === itemId
     );
 
-  quantityElement.id =
-    "qty-" +
-    seblak.id +
-    "-level-" +
-    level;
+  // Update tulisan level
+  const currentLevelElement =
+    document.getElementById(
+      "current-level-" +
+      seblak.id
+    );
 
-  quantityElement.textContent =
-    item
-      ? item.quantity
-      : 0;
+  if (currentLevelElement) {
+
+    currentLevelElement.textContent =
+      "Jumlah Level " + level;
+
+  }
+
+  // Update angka jumlah
+  const currentQtyElement =
+    document.getElementById(
+      "current-qty-" +
+      seblak.id
+    );
+
+  if (currentQtyElement) {
+
+    currentQtyElement.textContent =
+      item
+        ? item.quantity
+        : 0;
+
+  }
+
 }
-
 
     // ==============================
     // TAMBAH / KURANG
     // ==============================
 
-    function changeQuantity(productId, change) {
+function changeQuantity(productId, change) {
 
   const product =
     productsData.find(
@@ -833,6 +848,7 @@
 
   let itemId = String(productId);
 
+  // Seblak dipisahkan berdasarkan level
   if (isSeblak) {
     itemId =
       String(productId) +
@@ -846,11 +862,13 @@
         String(item.id) === itemId
     );
 
-  if (!item) {
+  // Jika belum ada dan tombol − ditekan
+  if (!item && change < 0) {
+    return;
+  }
 
-    if (change < 0) {
-      return;
-    }
+  // Buat item baru
+  if (!item) {
 
     item = {
       id: itemId,
@@ -866,8 +884,10 @@
     cart.push(item);
   }
 
+  // Tambah / kurangi jumlah
   item.quantity += change;
 
+  // Jika jumlah menjadi 0, hapus dari keranjang
   if (item.quantity <= 0) {
 
     cart =
@@ -879,42 +899,69 @@
     item = null;
   }
 
-      if (isSeblak) {
+  // ==============================
+  // UPDATE TAMPILAN JUMLAH
+  // ==============================
 
-  const qtyElement =
-    document.getElementById(
-      "qty-" +
-      productId +
-      "-level-" +
-      spicyLevel
-    );
+  if (isSeblak) {
 
-  if (qtyElement) {
-    qtyElement.textContent =
-      item
-        ? item.quantity
-        : 0;
+    // Simpan jumlah pada level yang sedang dipilih
+    const levelQtyElement =
+      document.getElementById(
+        "qty-" +
+        productId +
+        "-level-" +
+        spicyLevel
+      );
+
+    if (levelQtyElement) {
+
+      levelQtyElement.textContent =
+        item
+          ? item.quantity
+          : 0;
+
+    }
+
+    // Tampilkan jumlah level yang sedang dipilih
+    const currentQtyElement =
+      document.getElementById(
+        "current-qty-" +
+        productId
+      );
+
+    if (currentQtyElement) {
+
+      currentQtyElement.textContent =
+        item
+          ? item.quantity
+          : 0;
+
+    }
+
+  } else {
+
+    // Produk biasa
+    const qtyElement =
+      document.getElementById(
+        "qty-" + productId
+      );
+
+    if (qtyElement) {
+
+      qtyElement.textContent =
+        item
+          ? item.quantity
+          : 0;
+
+    }
+
   }
 
-} else {
-
-  const qtyElement =
-    document.getElementById(
-      "qty-" + productId
-    );
-
-  if (qtyElement) {
-    qtyElement.textContent =
-      item
-        ? item.quantity
-        : 0;
-  }
-
-}
-
+  // Update total keranjang
   updateCart();
-}
 
+}
 
     // ==============================
     // UPDATE KERANJANG
