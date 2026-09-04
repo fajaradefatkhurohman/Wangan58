@@ -632,9 +632,51 @@
         −
       </button>
 
-      <span id="qty-${product.id}-level-${spicyLevel}">
-        0
-      </span>
+      <div style="text-align:center; min-width:120px;">
+
+        <div
+          id="current-level-${product.id}"
+          style="font-size:12px; color:#777;"
+        >
+          Jumlah Level ${spicyLevel}
+        </div>
+
+        <span
+          id="qty-${product.id}-level-0"
+          style="display:none;"
+        >0</span>
+
+        <span
+          id="qty-${product.id}-level-1"
+          style="display:none;"
+        >0</span>
+
+        <span
+          id="qty-${product.id}-level-2"
+          style="display:none;"
+        >0</span>
+
+        <span
+          id="qty-${product.id}-level-3"
+          style="display:none;"
+        >0</span>
+
+        <span
+          id="qty-${product.id}-level-4"
+          style="display:none;"
+        >0</span>
+
+        <span
+          id="qty-${product.id}-level-5"
+          style="display:none;"
+        >0</span>
+
+        <strong
+          id="current-qty-${product.id}"
+          style="font-size:18px;"
+        >0</strong>
+
+      </div>
 
       <button
         onclick="changeQuantity('${product.id}', 1)"
