@@ -953,63 +953,6 @@ loadProducts();
 </html>
 
 
-      // ==============================
-      // SEBLAK + LEVEL
-      // ==============================
-
-      cart.forEach(item => {
-
-        const subtotal =
-          item.price *
-          item.quantity;
-
-
-        message +=
-          "- " +
-          item.name;
-
-
-        // Jika menu seblak
-        if (
-          item.name
-            .toLowerCase()
-            .includes("seblak")
-        ) {
-
-          message +=
-            " (Level " +
-            spicyLevel +
-            ")";
-
-        }
-
-
-        message +=
-          " x" +
-          item.quantity +
-          " = " +
-          formatRupiah(subtotal) +
-          "%0A";
-
-      });
-
-
-      let total = 0;
-
-
-      cart.forEach(item => {
-
-        total +=
-          item.price *
-          item.quantity;
-
-      });
-
-
-      message +=
-        "%0A*Total: " +
-        formatRupiah(total) +
-        "*";
 
 
       const url =
