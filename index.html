@@ -860,25 +860,50 @@
     // WHATSAPP
     // ==============================
 
-function orderWhatsApp() {
+    function orderWhatsApp() {
   if (cart.length === 0) {
     alert("Silakan pilih menu terlebih dahulu.");
     return;
   }
 
-  let message =
-    "Halo Seblak Wangan58,%0A%0A";
+  const customerName =
+    document.getElementById("customerName").value.trim();
 
-  message +=
-    "*Pesanan saya:*%0A";
+  const customerAddress =
+    document.getElementById("customerAddress").value.trim();
+
+  const customerNote =
+    document.getElementById("customerNote").value.trim();
+
+  if (customerName === "") {
+    alert("Silakan isi nama terlebih dahulu.");
+    document.getElementById("customerName").focus();
+    return;
+  }
+
+  if (customerAddress === "") {
+    alert("Silakan isi alamat pengantaran terlebih dahulu.");
+    document.getElementById("customerAddress").focus();
+    return;
+  }
+
+  let message = "Halo Seblak Wangan58,\n\n";
+
+  message += "*DATA PEMESAN*\n";
+  message += "Nama: " + customerName + "\n";
+  message += "Alamat: " + customerAddress + "\n";
+
+  if (customerNote !== "") {
+    message += "Catatan: " + customerNote + "\n";
+  }
+
+  message += "\n*PESANAN SAYA*\n";
 
   cart.forEach(item => {
     const subtotal =
       item.price * item.quantity;
 
-    message +=
-      "- " +
-      item.name;
+    message += "- " + item.name;
 
     if (
       item.name
@@ -896,7 +921,7 @@ function orderWhatsApp() {
       item.quantity +
       " = " +
       formatRupiah(subtotal) +
-      "%0A";
+      "\n";
   });
 
   let total = 0;
@@ -908,7 +933,7 @@ function orderWhatsApp() {
   });
 
   message +=
-    "%0A*Total: " +
+    "\n*Total: " +
     formatRupiah(total) +
     "*";
 
@@ -916,29 +941,16 @@ function orderWhatsApp() {
     "https://wa.me/" +
     WHATSAPP_NUMBER +
     "?text=" +
-    message;
+    encodeURIComponent(message);
 
-  window.open(
-    url,
-    "_blank"
-  );
+  window.open(url, "_blank");
 }
 
-      
-  loadProducts();
+loadProducts();
 
-</script>
-
+    </script>
 </body>
 </html>
-
-
-      let message =
-        "Halo Seblak Wangan58,%0A%0A";
-
-
-      message +=
-        "*Pesanan saya:*%0A";
 
 
       // ==============================
