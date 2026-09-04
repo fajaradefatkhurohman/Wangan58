@@ -860,8 +860,7 @@
     // WHATSAPP
     // ==============================
 
-    function orderWhatsApp() {
-
+function orderWhatsApp() {
   const customerName =
     document.getElementById("customerName").value.trim();
 
@@ -888,39 +887,24 @@
     return;
   }
 
-  let message =
-    "Halo Seblak Wangan58,%0A%0A";
+  let message = "Halo Seblak Wangan58,\n\n";
 
-  message +=
-    "*Data Pemesan:*%0A";
-
-  message +=
-    "Nama: " +
-    encodeURIComponent(customerName) +
-    "%0A";
-
-  message +=
-    "Alamat: " +
-    encodeURIComponent(customerAddress) +
-    "%0A";
+  message += "*DATA PEMESAN*\n";
+  message += "Nama: " + customerName + "\n";
+  message += "Alamat: " + customerAddress + "\n";
 
   if (customerNote !== "") {
-    message +=
-      "Catatan: " +
-      encodeURIComponent(customerNote) +
-      "%0A";
+    message += "Catatan: " + customerNote + "\n";
   }
 
-  message +=
-    "%0A*Pesanan saya:*%0A";
+  message += "\n*PESANAN SAYA*\n";
 
   cart.forEach(item => {
     const subtotal =
       item.price * item.quantity;
 
     message +=
-      "- " +
-      encodeURIComponent(item.name);
+      "- " + item.name;
 
     if (
       item.name
@@ -937,10 +921,8 @@
       " x" +
       item.quantity +
       " = " +
-      encodeURIComponent(
-        formatRupiah(subtotal)
-      ) +
-      "%0A";
+      formatRupiah(subtotal) +
+      "\n";
   });
 
   let total = 0;
@@ -952,17 +934,15 @@
   });
 
   message +=
-    "%0A*Total: " +
-    encodeURIComponent(
-      formatRupiah(total)
-    ) +
+    "\n*Total: " +
+    formatRupiah(total) +
     "*";
 
   const url =
     "https://wa.me/" +
     WHATSAPP_NUMBER +
     "?text=" +
-    message;
+    encodeURIComponent(message);
 
   window.open(url, "_blank");
 }
