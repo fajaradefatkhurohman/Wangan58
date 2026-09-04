@@ -858,47 +858,29 @@
     // WHATSAPP
     // ==============================
 
-function orderWhatsApp() {
+    function orderWhatsApp() {
 
   if (cart.length === 0) {
-    alert(
-      "Silakan pilih menu terlebih dahulu."
-    );
+    alert("Silakan pilih menu terlebih dahulu.");
     return;
   }
 
   const customerName =
-    document.getElementById(
-      "customerName"
-    ).value.trim();
+    document.getElementById("customerName").value.trim();
 
   const customerAddress =
-    document.getElementById(
-      "customerAddress"
-    ).value.trim();
+    document.getElementById("customerAddress").value.trim();
 
   const customerNote =
-    document.getElementById(
-      "customerNote"
-    ).value.trim();
+    document.getElementById("customerNote").value.trim();
 
-  if (!customerName) {
-    alert(
-      "Silakan isi nama terlebih dahulu."
-    );
-    document
-      .getElementById("customerName")
-      .focus();
+  if (customerName === "") {
+    alert("Silakan isi nama terlebih dahulu.");
     return;
   }
 
-  if (!customerAddress) {
-    alert(
-      "Silakan isi alamat terlebih dahulu."
-    );
-    document
-      .getElementById("customerAddress")
-      .focus();
+  if (customerAddress === "") {
+    alert("Silakan isi alamat terlebih dahulu.");
     return;
   }
 
@@ -913,24 +895,18 @@ function orderWhatsApp() {
   cart.forEach(item => {
 
     const subtotal =
-      item.price *
-      item.quantity;
+      item.price * item.quantity;
 
     total += subtotal;
 
     message +=
-      "- " +
-      item.name;
+      "- " + item.name;
 
     if (
-      item.name
-        .toLowerCase()
-        .includes("seblak")
+      item.name.toLowerCase().includes("seblak")
     ) {
       message +=
-        " (Level " +
-        spicyLevel +
-        ")";
+        " (Level " + spicyLevel + ")";
     }
 
     message +=
@@ -954,7 +930,7 @@ function orderWhatsApp() {
     "%0A📍 *Alamat:* " +
     encodeURIComponent(customerAddress);
 
-  if (customerNote) {
+  if (customerNote !== "") {
     message +=
       "%0A📝 *Catatan:* " +
       encodeURIComponent(customerNote);
@@ -966,10 +942,7 @@ function orderWhatsApp() {
     "?text=" +
     message;
 
-  window.open(
-    url,
-    "_blank"
-  );
+  window.open(url, "_blank");
 }
 
 
