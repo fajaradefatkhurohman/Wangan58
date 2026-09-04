@@ -877,27 +877,6 @@ if (!customerAddress) {
     return;
   }
 
-  const customerName =
-    document.getElementById("customerName").value.trim();
-
-  const customerAddress =
-    document.getElementById("customerAddress").value.trim();
-
-  const customerNote =
-    document.getElementById("customerNote").value.trim();
-
-  if (customerName === "") {
-    alert("Silakan isi nama terlebih dahulu.");
-    document.getElementById("customerName").focus();
-    return;
-  }
-
-  if (customerAddress === "") {
-    alert("Silakan isi alamat pengantaran terlebih dahulu.");
-    document.getElementById("customerAddress").focus();
-    return;
-  }
-
   let message = "Halo Seblak Wangan58,\n\n";
 
   message += "*DATA PEMESAN*\n";
