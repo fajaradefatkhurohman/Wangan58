@@ -716,97 +716,90 @@
     // TAMBAH / KURANG
     // ==============================
 
-    function changeQuantity(
-      productId,
-      change
-    ) {
+    function changeQuantity(productId, change) {
 
-      const product =
-        productsData.find(
-          p =>
-            String(p.id) ===
-            String(productId)
-        );
+  const product =
+    productsData.find(
+      p =>
+        String(p.id) ===
+        String(productId)
+    );
 
+  if (!product) {
+    return;
+  }
 
-      if (!product) {
+  const isSeblak =
+    product.name
+      .toLowerCase()
+      .includes("seblak");
 
-        return;
+  let itemId = String(productId);
 
-      }
+  if (isSeblak) {
+    itemId =
+      String(productId) +
+      "-level-" +
+      spicyLevel;
+  }
 
+  let item =
+    cart.find(
+      item =>
+        String(item.id) === itemId
+    );
 
-      let item =
-        cart.find(
-          item =>
-            String(item.id) ===
-            String(productId)
-        );
+  if (!item) {
 
-
-      if (!item) {
-
-        if (change < 0) {
-
-          return;
-
-        }
-
-
-        item = {
-
-          id: product.id,
-
-          name: product.name,
-
-          price: Number(product.price),
-
-          quantity: 0
-
-        };
-
-
-        cart.push(item);
-
-      }
-
-
-      item.quantity += change;
-
-
-      if (item.quantity <= 0) {
-
-        cart =
-          cart.filter(
-            i =>
-              String(i.id) !==
-              String(productId)
-          );
-
-        item = null;
-
-      }
-
-
-      const qtyElement =
-        document.getElementById(
-          "qty-" + productId
-        );
-
-
-      if (qtyElement) {
-
-        qtyElement.textContent =
-          item
-            ? item.quantity
-            : 0;
-
-      }
-
-
-      updateCart();
-
+    if (change < 0) {
+      return;
     }
+
+    item = {
+      id: itemId,
+      productId: product.id,
+      name: product.name,
+      price: Number(product.price),
+      quantity: 0,
+      spicyLevel: isSeblak
+        ? spicyLevel
+        : null
+    };
+
+    cart.push(item);
+  }
+
+  item.quantity += change;
+
+  if (item.quantity <= 0) {
+
+    cart =
+      cart.filter(
+        i =>
+          String(i.id) !== itemId
+      );
+
+    item = null;
+  }
+
+  if (!isSeblak) {
+
+    const qtyElement =
+      document.getElementById(
+        "qty-" + productId
+      );
+
+    if (qtyElement) {
+      qtyElement.textContent =
+        item
+          ? item.quantity
+          : 0;
+    }
+
+  }
+
+  updateCart();
+}
 
 
     // ==============================
