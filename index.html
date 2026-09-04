@@ -860,15 +860,10 @@
     // WHATSAPP
     // ==============================
 
-function orderWhatsApp() {
-  const customerName =
-    document.getElementById("customerName").value.trim();
-
-  const customerAddress =
-    document.getElementById("customerAddress").value.trim();
-
-  const customerNote =
-    document.getElementById("customerNote").value.trim();
+    function orderWhatsApp() {
+  const customerName = document.getElementById("customerName").value.trim();
+  const customerAddress = document.getElementById("customerAddress").value.trim();
+  const customerNote = document.getElementById("customerNote").value.trim();
 
   if (cart.length === 0) {
     alert("Silakan pilih menu terlebih dahulu.");
@@ -900,22 +895,12 @@ function orderWhatsApp() {
   message += "\n*PESANAN SAYA*\n";
 
   cart.forEach(item => {
-    const subtotal =
-      item.price * item.quantity;
+    const subtotal = item.price * item.quantity;
 
-    message +=
-      "- " + item.name;
-    }
+    message += "- " + item.name;
 
-    if (
-      item.name
-        .toLowerCase()
-        .includes("seblak")
-    ) {
-      message +=
-        " (Level " +
-        spicyLevel +
-        ")";
+    if (item.name.toLowerCase().includes("seblak")) {
+      message += " (Level " + spicyLevel + ")";
     }
 
     message +=
@@ -929,9 +914,7 @@ function orderWhatsApp() {
   let total = 0;
 
   cart.forEach(item => {
-    total +=
-      item.price *
-      item.quantity;
+    total += item.price * item.quantity;
   });
 
   message +=
@@ -947,6 +930,8 @@ function orderWhatsApp() {
 
   window.open(url, "_blank");
 }
+
+    loadProducts();
 
 
       let message =
