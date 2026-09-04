@@ -852,6 +852,26 @@
     // ==============================
 
     function orderWhatsApp() {
+
+      const customerName =
+  document.getElementById("customerName").value.trim();
+
+const customerAddress =
+  document.getElementById("customerAddress").value.trim();
+
+const customerNote =
+  document.getElementById("customerNote").value.trim();
+
+if (!customerName) {
+  alert("Silakan isi Nama terlebih dahulu.");
+  return;
+}
+
+if (!customerAddress) {
+  alert("Silakan isi Alamat pengantaran terlebih dahulu.");
+  return;
+}
+      
   if (cart.length === 0) {
     alert("Silakan pilih menu terlebih dahulu.");
     return;
