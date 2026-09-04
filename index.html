@@ -860,47 +860,35 @@
     // WHATSAPP
     // ==============================
 
-    function orderWhatsApp() {
-  const customerName = document.getElementById("customerName").value.trim();
-  const customerAddress = document.getElementById("customerAddress").value.trim();
-  const customerNote = document.getElementById("customerNote").value.trim();
-
+function orderWhatsApp() {
   if (cart.length === 0) {
     alert("Silakan pilih menu terlebih dahulu.");
     return;
   }
 
-  if (customerName === "") {
-    alert("Silakan isi nama terlebih dahulu.");
-    document.getElementById("customerName").focus();
-    return;
-  }
+  let message =
+    "Halo Seblak Wangan58,%0A%0A";
 
-  if (customerAddress === "") {
-    alert("Silakan isi alamat pengantaran terlebih dahulu.");
-    document.getElementById("customerAddress").focus();
-    return;
-  }
-
-  let message = "Halo Seblak Wangan58,\n\n";
-
-  message += "*DATA PEMESAN*\n";
-  message += "Nama: " + customerName + "\n";
-  message += "Alamat: " + customerAddress + "\n";
-
-  if (customerNote !== "") {
-    message += "Catatan: " + customerNote + "\n";
-  }
-
-  message += "\n*PESANAN SAYA*\n";
+  message +=
+    "*Pesanan saya:*%0A";
 
   cart.forEach(item => {
-    const subtotal = item.price * item.quantity;
+    const subtotal =
+      item.price * item.quantity;
 
-    message += "- " + item.name;
+    message +=
+      "- " +
+      item.name;
 
-    if (item.name.toLowerCase().includes("seblak")) {
-      message += " (Level " + spicyLevel + ")";
+    if (
+      item.name
+        .toLowerCase()
+        .includes("seblak")
+    ) {
+      message +=
+        " (Level " +
+        spicyLevel +
+        ")";
     }
 
     message +=
@@ -908,17 +896,19 @@
       item.quantity +
       " = " +
       formatRupiah(subtotal) +
-      "\n";
+      "%0A";
   });
 
   let total = 0;
 
   cart.forEach(item => {
-    total += item.price * item.quantity;
+    total +=
+      item.price *
+      item.quantity;
   });
 
   message +=
-    "\n*Total: " +
+    "%0A*Total: " +
     formatRupiah(total) +
     "*";
 
@@ -926,11 +916,14 @@
     "https://wa.me/" +
     WHATSAPP_NUMBER +
     "?text=" +
-    encodeURIComponent(message);
+    message;
 
-  window.open(url, "_blank");
+  window.open(
+    url,
+    "_blank"
+  );
 }
-
+    
     loadProducts();
 
 
