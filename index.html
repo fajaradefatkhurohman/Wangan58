@@ -198,45 +198,6 @@
       color: #e63946;
     }
 
-    /* ==============================
-   FORM PEMESANAN
-============================== */
-
-.order-form {
-  background: #f8f8f8;
-  border-radius: 10px;
-  padding: 12px;
-  margin-bottom: 10px;
-}
-
-.order-form-title {
-  font-weight: bold;
-  font-size: 14px;
-  margin-bottom: 10px;
-}
-
-.order-form input,
-.order-form textarea {
-  width: 100%;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 10px;
-  margin-bottom: 8px;
-  font-family: Arial, sans-serif;
-  font-size: 14px;
-  outline: none;
-}
-
-.order-form textarea {
-  min-height: 70px;
-  resize: vertical;
-}
-
-.order-form input:focus,
-.order-form textarea:focus {
-  border-color: #e63946;
-}
-
     .order-button {
       width: 100%;
       border: none;
@@ -305,31 +266,6 @@
   <div class="cart">
 
     <div class="cart-inner">
-
-      <div class="order-form">
-
-  <div class="order-form-title">
-    📝 Data Pemesan
-  </div>
-
-  <input
-    type="text"
-    id="customerName"
-    placeholder="Nama"
-  >
-
-  <input
-    type="text"
-    id="customerAddress"
-    placeholder="Alamat pengantaran"
-  >
-
-  <textarea
-    id="customerNote"
-    placeholder="Catatan pesanan (opsional)"
-  ></textarea>
-
-</div>
 
       <div class="cart-info">
 
@@ -858,60 +794,27 @@
     // WHATSAPP
     // ==============================
 
+    function orderWhatsApp() {
 
-function orderWhatsApp() {
+      if (cart.length === 0) {
 
-  if (cart.length === 0) {
-    alert("Silakan pilih menu terlebih dahulu.");
-    return;
-  }
+        alert(
+          "Silakan pilih menu terlebih dahulu."
+        );
 
-  let message =
-    "Halo Seblak Wangan58,%0A%0A";
+        return;
 
-  message +=
-    "*Pesanan saya:*%0A";
+      }
 
-  let total = 0;
 
-  cart.forEach(item => {
+      let message =
+        "Halo Seblak Wangan58,%0A%0A";
 
-    const subtotal =
-      item.price * item.quantity;
 
-    total += subtotal;
-
-    message +=
-      "- " + item.name;
-
-    if (
-      item.name.toLowerCase().includes("seblak")
-    ) {
       message +=
-        " (Level " + spicyLevel + ")";
-    }
+        "*Pesanan saya:*%0A";
 
-    message +=
-      " x" +
-      item.quantity +
-      " = " +
-      formatRupiah(subtotal) +
-      "%0A";
-  });
 
-  message +=
-    "%0A*Total: " +
-    formatRupiah(total) +
-    "*";
-
-  const url =
-    "https://wa.me/" +
-    WHATSAPP_NUMBER +
-    "?text=" +
-    message;
-
-  window.open(url, "_blank");
-}
       // ==============================
       // SEBLAK + LEVEL
       // ==============================
