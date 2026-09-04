@@ -621,27 +621,47 @@
 
               ${spicyHTML}
 
-              <div class="quantity">
+<div class="quantity">
 
-                <button
-                  onclick="changeQuantity('${product.id}', -1)"
-                >
-                  −
-                </button>
+  ${
+    product.name.toLowerCase().includes("seblak")
+    ? `
+      <button
+        onclick="changeQuantity('${product.id}', -1)"
+      >
+        −
+      </button>
 
-                <span
-                  id="qty-${product.id}"
-                >
-                  0
-                </span>
+      <span id="qty-${product.id}-level-${spicyLevel}">
+        0
+      </span>
 
-                <button
-                  onclick="changeQuantity('${product.id}', 1)"
-                >
-                  +
-                </button>
+      <button
+        onclick="changeQuantity('${product.id}', 1)"
+      >
+        +
+      </button>
+    `
+    : `
+      <button
+        onclick="changeQuantity('${product.id}', -1)"
+      >
+        −
+      </button>
 
-              </div>
+      <span id="qty-${product.id}">
+        0
+      </span>
+
+      <button
+        onclick="changeQuantity('${product.id}', 1)"
+      >
+        +
+      </button>
+    `
+  }
+
+</div>
 
             `;
 
