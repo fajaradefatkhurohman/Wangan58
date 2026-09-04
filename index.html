@@ -858,25 +858,119 @@
     // WHATSAPP
     // ==============================
 
-    function orderWhatsApp() {
+function orderWhatsApp() {
 
-      if (cart.length === 0) {
+  if (cart.length === 0) {
+    alert(
+      "Silakan pilih menu terlebih dahulu."
+    );
+    return;
+  }
 
-        alert(
-          "Silakan pilih menu terlebih dahulu."
-        );
+  const customerName =
+    document.getElementById(
+      "customerName"
+    ).value.trim();
 
-        return;
+  const customerAddress =
+    document.getElementById(
+      "customerAddress"
+    ).value.trim();
 
-      }
+  const customerNote =
+    document.getElementById(
+      "customerNote"
+    ).value.trim();
 
+  if (!customerName) {
+    alert(
+      "Silakan isi nama terlebih dahulu."
+    );
+    document
+      .getElementById("customerName")
+      .focus();
+    return;
+  }
 
-      let message =
-        "Halo Seblak Wangan58,%0A%0A";
+  if (!customerAddress) {
+    alert(
+      "Silakan isi alamat terlebih dahulu."
+    );
+    document
+      .getElementById("customerAddress")
+      .focus();
+    return;
+  }
 
+  let message =
+    "Halo Seblak Wangan58,%0A%0A";
 
+  message +=
+    "*Pesanan saya:*%0A";
+
+  let total = 0;
+
+  cart.forEach(item => {
+
+    const subtotal =
+      item.price *
+      item.quantity;
+
+    total += subtotal;
+
+    message +=
+      "- " +
+      item.name;
+
+    if (
+      item.name
+        .toLowerCase()
+        .includes("seblak")
+    ) {
       message +=
-        "*Pesanan saya:*%0A";
+        " (Level " +
+        spicyLevel +
+        ")";
+    }
+
+    message +=
+      " x" +
+      item.quantity +
+      " = " +
+      formatRupiah(subtotal) +
+      "%0A";
+  });
+
+  message +=
+    "%0A*Total: " +
+    formatRupiah(total) +
+    "*";
+
+  message +=
+    "%0A%0A👤 *Nama:* " +
+    encodeURIComponent(customerName);
+
+  message +=
+    "%0A📍 *Alamat:* " +
+    encodeURIComponent(customerAddress);
+
+  if (customerNote) {
+    message +=
+      "%0A📝 *Catatan:* " +
+      encodeURIComponent(customerNote);
+  }
+
+  const url =
+    "https://wa.me/" +
+    WHATSAPP_NUMBER +
+    "?text=" +
+    message;
+
+  window.open(
+    url,
+    "_blank"
+  );
+}
 
 
       // ==============================
