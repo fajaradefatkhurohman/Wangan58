@@ -298,11 +298,42 @@
        KERANJANG
   ============================== -->
 
-  <div class="cart">
+<div class="cart">
+  <div class="cart-inner">
 
-    <div class="cart-inner">
+    <div class="order-form">
+      <div class="order-form-title">
+        📝 Data Pemesan
+      </div>
 
-      <div class="cart-info">
+      <input
+        type="text"
+        id="customerName"
+        placeholder="Nama"
+      >
+
+      <input
+        type="text"
+        id="customerAddress"
+        placeholder="Alamat pengantaran"
+      >
+
+      <textarea
+        id="customerNote"
+        placeholder="Catatan pesanan (opsional)"
+      ></textarea>
+    </div>
+
+    <div class="cart-info">
+      <span>
+        Pesanan:
+        <strong id="totalItems">0</strong>
+      </span>
+
+      <span class="cart-total" id="totalPrice">
+        Rp 0
+      </span>
+    </div>
 
         <span>
           Pesanan:
