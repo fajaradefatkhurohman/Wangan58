@@ -802,21 +802,38 @@
     item = null;
   }
 
-  if (!isSeblak) {
+      if (isSeblak) {
 
-    const qtyElement =
-      document.getElementById(
-        "qty-" + productId
-      );
+  const qtyElement =
+    document.getElementById(
+      "qty-" +
+      productId +
+      "-level-" +
+      spicyLevel
+    );
 
-    if (qtyElement) {
-      qtyElement.textContent =
-        item
-          ? item.quantity
-          : 0;
-    }
-
+  if (qtyElement) {
+    qtyElement.textContent =
+      item
+        ? item.quantity
+        : 0;
   }
+
+} else {
+
+  const qtyElement =
+    document.getElementById(
+      "qty-" + productId
+    );
+
+  if (qtyElement) {
+    qtyElement.textContent =
+      item
+        ? item.quantity
+        : 0;
+  }
+
+}
 
   updateCart();
 }
