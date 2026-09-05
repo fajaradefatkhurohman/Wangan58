@@ -365,17 +365,21 @@ overflow-y: auto;
 <div class="cart">
   <div class="cart-inner">
 
-    <div class="order-form">
-      <div class="order-form-title">
-        📝 Data Pemesan
-      </div>
+<div class="order-form">
+  <div
+    class="order-form-title"
+    onclick="toggleOrderForm()"
+  >
+    📝 Data Pemesan
+    <span id="orderFormArrow">▼</span>
+  </div>
 
-      <input
-        type="text"
-        id="customerName"
-        placeholder="Nama *"
-      >
-
+  <input
+    type="text"
+    id="customerName"
+    placeholder="Nama *"
+  >
+    
       <input
         type="text"
         id="customerAddress"
