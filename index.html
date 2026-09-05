@@ -1076,11 +1076,16 @@ if (cartItemsElement) {
 
       }
 
-      cartHTML +=
-        " × " +
-        item.quantity +
-        "</div>";
+const subtotal =
+  item.price * item.quantity;
 
+cartHTML +=
+  " × " +
+  item.quantity +
+  " = " +
+  formatRupiah(subtotal) +
+  "</div>";
+      
     });
 
     cartItemsElement.innerHTML =
