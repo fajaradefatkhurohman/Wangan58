@@ -237,15 +237,23 @@ overflow-y: auto;
 
 #cartItems {
   margin-top: 8px;
-  max-height: 120px;
+  max-height: 150px;
   overflow-y: auto;
+  background: #fafafa;
+  border-radius: 8px;
+  padding: 5px 8px;
 }
 
 #cartItems div {
-  padding: 3px 0;
+  padding: 6px 2px;
   border-bottom: 1px solid #eee;
+  font-size: 13px;
 }
 
+#cartItems div:last-child {
+  border-bottom: none;
+}
+    
 .cart-total {
   white-space: nowrap;
 }
