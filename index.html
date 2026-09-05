@@ -1122,6 +1122,30 @@ cartHTML +=
 }
 }
 
+  function toggleOrderForm() {
+
+  const form =
+    document.querySelector(".order-form");
+
+  const arrow =
+    document.getElementById("orderFormArrow");
+
+  if (form.classList.contains("open")) {
+
+    form.classList.remove("open");
+
+    arrow.textContent = "▼";
+
+  } else {
+
+    form.classList.add("open");
+
+    arrow.textContent = "▲";
+
+  }
+
+}
+
   function clearCart() {
 
   if (cart.length === 0) {
