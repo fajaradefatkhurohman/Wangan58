@@ -998,7 +998,7 @@ function changeQuantity(productId, change) {
     // UPDATE KERANJANG
     // ==============================
 
-   function updateCart() {
+  function updateCart() {
 
   let totalItems = 0;
   let totalPrice = 0;
@@ -1023,6 +1023,46 @@ function changeQuantity(productId, change) {
     "totalPrice"
   ).textContent =
     formatRupiah(totalPrice);
+
+
+  // ==============================
+  // RINGKASAN SEBLAK PER LEVEL
+  // ==============================
+
+  const summaryElement =
+    document.getElementById(
+      "seblakSummary"
+    );
+
+  if (summaryElement) {
+
+    let summaryHTML = "";
+
+    cart.forEach(item => {
+
+      if (
+        item.spicyLevel !== null &&
+        item.spicyLevel !== undefined &&
+        item.quantity > 0
+      ) {
+
+        summaryHTML +=
+          "🌶️ Level " +
+          item.spicyLevel +
+          " × " +
+          item.quantity +
+          "<br>";
+
+      }
+
+    });
+
+    summaryElement.innerHTML =
+      summaryHTML;
+
+  }
+
+}
 
 
   // ==============================
