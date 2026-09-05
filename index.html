@@ -1022,6 +1022,52 @@ function updateCart() {
   ).textContent =
     formatRupiah(totalPrice);
 
+  const cartItemsElement =
+  document.getElementById("cartItems");
+
+if (cartItemsElement) {
+
+  if (cart.length === 0) {
+
+    cartItemsElement.innerHTML =
+      "Belum ada pesanan";
+
+  } else {
+
+    let cartHTML = "";
+
+    cart.forEach(item => {
+
+      cartHTML +=
+        "<div>" +
+        item.name;
+
+      if (
+        item.name
+          .toLowerCase()
+          .includes("seblak")
+      ) {
+
+        cartHTML +=
+          " (Level " +
+          item.spicyLevel +
+          ")";
+
+      }
+
+      cartHTML +=
+        " × " +
+        item.quantity +
+        "</div>";
+
+    });
+
+    cartItemsElement.innerHTML =
+      cartHTML;
+
+  }
+
+}
 }
     
 
