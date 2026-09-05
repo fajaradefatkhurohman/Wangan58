@@ -227,12 +227,28 @@ overflow-y: auto;
     }
 
     .cart-info {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-      font-size: 15px;
-    }
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 15px;
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+
+#cartItems {
+  margin-top: 8px;
+  max-height: 120px;
+  overflow-y: auto;
+}
+
+#cartItems div {
+  padding: 3px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.cart-total {
+  white-space: nowrap;
+}
 
     .cart-total {
       font-size: 19px;
