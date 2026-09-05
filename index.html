@@ -289,8 +289,15 @@ overflow-y: auto;
   border-radius: 10px;
   padding: 12px;
   margin-bottom: 10px;
+  overflow: hidden;
+  max-height: 48px;
+  transition: max-height 0.3s ease;
 }
 
+    .order-form.open {
+  max-height: 300px;
+}
+    
 .order-form-title {
   font-weight: bold;
   font-size: 14px;
