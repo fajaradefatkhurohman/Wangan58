@@ -1167,6 +1167,32 @@ cartHTML +=
 
 }
 
+  function toggleCartItems() {
+
+  const cartItems =
+    document.getElementById("cartItems");
+
+  const arrow =
+    document.getElementById("cartArrow");
+
+  if (
+    cartItems.style.display === "none"
+  ) {
+
+    cartItems.style.display = "block";
+
+    arrow.textContent = "▲";
+
+  } else {
+
+    cartItems.style.display = "none";
+
+    arrow.textContent = "▼";
+
+  }
+
+}
+
   function clearCart() {
 
   if (cart.length === 0) {
