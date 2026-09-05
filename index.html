@@ -998,15 +998,18 @@ function changeQuantity(productId, change) {
     // UPDATE KERANJANG
     // ==============================
 
-  function updateCart() {
+function updateCart() {
 
   let totalItems = 0;
+
   let totalPrice = 0;
+
 
   cart.forEach(item => {
 
     totalItems +=
       item.quantity;
+
 
     totalPrice +=
       item.price *
@@ -1014,16 +1017,20 @@ function changeQuantity(productId, change) {
 
   });
 
+
   document.getElementById(
     "totalItems"
   ).textContent =
     totalItems;
+
 
   document.getElementById(
     "totalPrice"
   ).textContent =
     formatRupiah(totalPrice);
 
+}
+    
 
   // ==============================
   // RINGKASAN SEBLAK PER LEVEL
