@@ -1112,7 +1112,61 @@ cartHTML +=
 
 }
 }
-    
+
+  function clearCart() {
+
+  if (cart.length === 0) {
+    return;
+  }
+
+  const yakin =
+    confirm("Kosongkan semua pesanan?");
+
+  if (!yakin) {
+    return;
+  }
+
+  cart = [];
+
+  updateCart();
+
+  // Reset jumlah produk biasa
+  productsData.forEach(product => {
+
+    const qtyElement =
+      document.getElementById(
+        "qty-" + product.id
+      );
+
+    if (qtyElement) {
+      qtyElement.textContent = 0;
+    }
+
+  });
+
+  // Reset tampilan jumlah Seblak
+  const seblak =
+    productsData.find(
+      product =>
+        product.name
+          .toLowerCase()
+          .includes("seblak")
+    );
+
+  if (seblak) {
+
+    const currentQtyElement =
+      document.getElementById(
+        "current-qty-" + seblak.id
+      );
+
+    if (currentQtyElement) {
+      currentQtyElement.textContent = 0;
+    }
+
+  }
+
+}
 
     // ==============================
     // WHATSAPP
