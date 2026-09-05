@@ -135,34 +135,53 @@
     ============================== */
 
     .quantity {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 10px;
-      margin-top: 12px;
-    }
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 12px;
+}
 
-    .quantity button {
-      width: 34px;
-      height: 34px;
-      border: none;
-      border-radius: 50%;
-      background: #111;
-      color: white;
-      font-size: 20px;
-      cursor: pointer;
-    }
+.quantity button {
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: #111;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-    .quantity button:active {
-      transform: scale(0.95);
-    }
+.quantity button:active {
+  transform: scale(0.95);
+}
 
-    .quantity span {
-      min-width: 25px;
-      text-align: center;
-      font-weight: bold;
-      font-size: 16px;
-    }
+.quantity span {
+  min-width: 25px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/* Tampilan jumlah Seblak */
+.quantity > div {
+  min-width: 105px;
+  text-align: center;
+  padding: 5px 10px;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 8px;
+}
+
+.quantity > div strong {
+  display: block;
+  font-size: 20px !important;
+  line-height: 24px;
+}
 
     /* ==============================
        KERANJANG
